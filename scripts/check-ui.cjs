@@ -35,6 +35,7 @@ const fs = require('node:fs');
   await page.getByRole('link', { name: '← 전체 시안', exact: true }).click();
   await page.getByRole('button', { name: 'A안 채용공고 HTML 코드' }).click();
   await page.getByRole('dialog').waitFor();
+  await page.locator('summary').click();
   await page.getByLabel('공개 이미지 주소', { exact: true }).fill('https://example.com/VW-A.png');
   const html = await page.getByLabel('붙여 넣을 HTML').inputValue();
   if (!html.includes('href="https://www.v-w.co.kr/"') || !html.includes('src="https://example.com/VW-A.png"')) errors.push('HTML export incorrect');
@@ -43,6 +44,7 @@ const fs = require('node:fs');
   await browser.close();
   if (errors.length) { console.error(errors); process.exitCode = 1; }
 })();
+
 
 
 
