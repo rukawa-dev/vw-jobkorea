@@ -32,6 +32,9 @@ export default function HtmlCodeDialog({ design, onClose }) {
   const dialog = useRef(null);
   const textarea = useRef(null);
   const [imageUrl, setImageUrl] = useState(() => initialUrl(imageKey));
+  const [mobileUrl, setMobileUrl] = useState(() => initialUrl(imageKey + '-MO'));
+  const [responsive, setResponsive] = useState(true);
+  const [mobileCheck, setMobileCheck] = useState({url:'', state:'loading'});
   const [status, setStatus] = useState('');
   const [copying, setCopying] = useState(false);
   const [checking, setChecking] = useState({ url: '', state: 'loading' });
@@ -39,8 +42,12 @@ export default function HtmlCodeDialog({ design, onClose }) {
   const [editing, setEditing] = useState(() => !publicImageUrl(imageUrl.trim()));
   const valid = publicImageUrl(imageUrl.trim());
   const imageState = checking.url === imageUrl.trim() ? checking.state : 'loading';
-  const ready = valid && imageState === 'ready';
-  const code = `<div style="width:100%;max-width:860px;margin:0 auto;text-align:center;">\n  <a href="${website}" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">\n    <img src="${escapeAttribute(imageUrl.trim() || '공개_이미지_URL을_입력해주세요')}" alt="브이더블유 ${design.jobTitle || '디지털 · UI/UX 디자이너'} 채용 — ${design.name}" width="860" border="0" style="display:block;width:100%;max-width:860px;height:auto;margin:0 auto;border:0;" />\n  </a>\n</div>`;
+  const mobileValid = publicImageUrl(mobileUrl.trim());
+  const mobileState = mobileCheck.url === mobileUrl.trim() ? mobileCheck.state : 'loading';
+  const ready = valid && imageState === 'ready' && (!responsive || (mobileValid && mobileState === 'ready'));
+  const pcCode = `<div style="width:100%;max-width:860px;margin:0 auto;text-align:center;">\n  <a href="${website}" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">\n    <img src="${escapeAttribute(imageUrl.trim() || '공개_이미지_URL을_입력해주세요')}" alt="브이더블유 ${design.jobTitle || '디지털 · UI/UX 디자이너'} 채용 — ${design.name}" width="860" border="0" style="display:block;width:100%;max-width:860px;height:auto;margin:0 auto;border:0;" />\n  </a>\n</div>`;
+
+  const code = responsive ? pcCode.replace('    <img', '    <picture>\n      <source media="(max-width: 767px)" srcset="' + escapeAttribute(mobileUrl.trim()) + '" />\n      <img').replace('\n  </a>', '\n    </picture>\n  </a>') : pcCode;
 
   useEffect(() => {
     const previousFocus = document.activeElement;
@@ -76,6 +83,27 @@ export default function HtmlCodeDialog({ design, onClose }) {
     return () => { active = false; clearTimeout(start); clearTimeout(timeout); image.onload = null; image.onerror = null; };
   }, [imageUrl, retry]);
 
+  useEffect(() => {
+    const url = mobileUrl.trim();
+    if (!publicImageUrl(url)) return;
+    let active = true;
+    const image = new Image();
+    let timeout;
+    setMobileCheck({ url, state: 'loading' });
+    const finish = state => {
+      if (!active) return;
+      clearTimeout(timeout);
+      setMobileCheck({ url, state });
+    };
+    image.onload = () => finish(image.naturalWidth > 0 ? 'ready' : 'error');
+    image.onerror = () => finish('error');
+    const start = setTimeout(() => {
+      timeout = setTimeout(() => { finish('error'); active = false; }, 15000);
+      image.src = url;
+    }, 300);
+    return () => { active = false; clearTimeout(start); clearTimeout(timeout); image.onload = null; image.onerror = null; };
+  }, [mobileUrl, retry]);
+
   async function copyCode() {
     if (!ready || copying) return;
     setCopying(true);
@@ -92,7 +120,7 @@ export default function HtmlCodeDialog({ design, onClose }) {
       try { copied = document.execCommand('copy'); } catch { copied = false; }
     }
     if (copied) {
-      try { localStorage.setItem(`vw-image-url-${imageKey}`, imageUrl.trim()); } catch { /* Optional persistence. */ }
+      try { localStorage.setItem(`vw-image-url-${imageKey}`, imageUrl.trim()); if (responsive) localStorage.setItem(`vw-image-url-${imageKey}-MO`, mobileUrl.trim()); } catch { /* Optional persistence. */ }
     }
     setStatus(copied ? '복사했습니다. 잡코리아 편집기의 HTML 모드에 붙여 넣으세요.' : '자동 복사가 지원되지 않습니다. 선택된 코드를 Ctrl+C 또는 길게 눌러 복사해주세요.');
     setCopying(false);
@@ -101,14 +129,18 @@ export default function HtmlCodeDialog({ design, onClose }) {
   return <dialog ref={dialog} className="html-dialog" aria-labelledby="html-dialog-title" aria-describedby="html-dialog-description" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === dialog.current) { const bounds = dialog.current.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) onClose(); } }}>
     <header className="html-dialog-header"><div><p>{design.jobTitle ? '기획자 · PM / ' : ''}{design.letter} / {design.name}</p><h2 id="html-dialog-title">채용공고 HTML 코드</h2></div><button type="button" className="html-close" onClick={onClose} aria-label="팝업 닫기">×</button></header>
     <div className="html-dialog-content"><p id="html-dialog-description">코드를 복사해 잡코리아 편집기의 <strong>HTML 모드</strong>에 붙여 넣으세요.</p>
+<label className="html-mode">표시 방식<select value={responsive ? "responsive" : "pc"} onChange={event => {setResponsive(event.target.value === "responsive"); setStatus("");}}><option value="responsive">PC + MO 자동 전환</option><option value="pc">PC 이미지 공통 사용</option></select></label>
       <div className={`html-image-status ${!valid || imageState === 'error' ? 'is-error' : ''}`}>
-        <div role="status" aria-live="polite"><span className="html-state-dot" aria-hidden="true"/><span>{!valid ? '공개 이미지 주소를 입력해주세요.' : imageState === 'loading' ? '공고 이미지를 확인하고 있습니다…' : imageState === 'ready' ? '공고 이미지가 준비되었습니다.' : '이미지를 불러오지 못했습니다. 주소 또는 배포 상태를 확인해주세요.'}</span></div>
-        {valid && <a href={imageUrl.trim()} target="_blank" rel="noopener noreferrer">이미지 보기 ↗</a>}
+        <div role="status" aria-live="polite"><span className="html-state-dot" aria-hidden="true"/><span>{!valid ? '공개 이미지 주소를 입력해주세요.' : imageState === 'loading' ? '공고 이미지를 확인하고 있습니다…' : imageState === 'ready' ? 'PC 공고 이미지가 준비되었습니다.' : '이미지를 불러오지 못했습니다. 주소 또는 배포 상태를 확인해주세요.'}</span></div>
+        {valid && <a href={imageUrl.trim()} target="_blank" rel="noopener noreferrer">PC 이미지 보기 ↗</a>}
         {valid && imageState === 'error' && <button className="html-retry" onClick={() => { setChecking({ url: imageUrl.trim(), state: 'loading' }); setStatus(''); setRetry(value => value + 1); }}>다시 확인</button>}
       </div>
+<p className="html-url-help">767px 이하에서는 MO 이미지가 표시됩니다. 잡코리아 적용 여부는 저장 후 확인해주세요.</p>
+      {responsive && <div className={'html-image-status ' + (!mobileValid || mobileState === 'error' ? 'is-error' : '')}><div role="status">{!mobileValid ? 'MO 공개 이미지 주소를 입력해주세요.' : mobileState === 'ready' ? 'MO 이미지가 준비되었습니다.' : mobileState === 'error' ? 'MO 이미지를 불러오지 못했습니다.' : 'MO 이미지를 확인하고 있습니다…'}</div>{mobileValid && <a href={mobileUrl.trim()} target="_blank" rel="noopener noreferrer">MO 이미지 보기 ↗</a>}{mobileState === 'error' && <button className="html-retry" onClick={() => setRetry(value => value + 1)}>MO 다시 확인</button>}</div>}
       <details className="html-url-settings" open={editing} onToggle={event => setEditing(event.currentTarget.open)}><summary>이미지 주소 변경</summary><div>
-        <label htmlFor="public-image-url">공개 이미지 주소</label><input id="public-image-url" type="url" value={imageUrl} placeholder="https://example.com/recruitment.png" onChange={event => { setImageUrl(event.target.value); setStatus(''); }} aria-describedby="image-url-help" aria-invalid={imageUrl !== '' && !valid}/>
+        <label htmlFor="public-image-url">PC 공개 이미지 주소</label><input id="public-image-url" type="url" value={imageUrl} placeholder="https://example.com/recruitment.png" onChange={event => { setImageUrl(event.target.value); setStatus(''); }} aria-describedby="image-url-help" aria-invalid={imageUrl !== '' && !valid}/>
         <p className={`html-url-help ${imageUrl && !valid ? 'invalid' : ''}`} id="image-url-help">{imageUrl && !valid ? '외부에서 접근할 수 있는 http(s) 이미지 주소를 입력해주세요. 로컬·내부 IP 주소는 사용할 수 없습니다.' : '다른 이미지를 사용할 때만 변경하세요. 로그인 없이 열리는 공개 주소가 필요합니다.'}</p>
+<label htmlFor="mobile-image-url" hidden={!responsive}>MO 공개 이미지 주소</label>{responsive && <><input id="mobile-image-url" type="url" value={mobileUrl} onChange={event => {setMobileUrl(event.target.value); setStatus('');}} aria-invalid={!mobileValid} aria-describedby="image-url-help"/><p className="html-url-help">모바일 전용 이미지의 공개 주소입니다.</p></>}
       </div></details>
       <div className="html-code-label"><label htmlFor="recruitment-html">붙여 넣을 HTML</label><span>이미지 클릭 → v-w.co.kr</span></div>
       <textarea ref={textarea} id="recruitment-html" readOnly spellCheck="false" value={code}/>
