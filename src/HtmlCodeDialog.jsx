@@ -20,9 +20,9 @@ function initialUrl(letter) {
     const saved = localStorage.getItem(`vw-image-url-${letter}`);
     if (saved) return saved;
   } catch { /* Storage can be unavailable in private browsing. */ }
-  const base = import.meta.env.VITE_PUBLIC_SITE_URL || window.location.origin;
+  const base = import.meta.env.VITE_PUBLIC_SITE_URL || new URL(import.meta.env.BASE_URL, window.location.origin).href;
   try {
-    const url = new URL(`/downloads/VW-${letter}-3x.png`, base).href;
+    const url = new URL(`downloads/VW-${letter}-3x.png`, base.replace(/\/?$/, '/')).href;
     return publicImageUrl(url) ? url : '';
   } catch { return ''; }
 }
@@ -74,7 +74,7 @@ export default function HtmlCodeDialog({ design, onClose }) {
   return <dialog ref={dialog} className="html-dialog" aria-labelledby="html-dialog-title" aria-describedby="html-dialog-description" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === dialog.current) { const bounds = dialog.current.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) onClose(); } }}>
     <header className="html-dialog-header"><div><p>{design.letter} / {design.name}</p><h2 id="html-dialog-title">채용공고 HTML 코드</h2></div><button type="button" className="html-close" onClick={onClose} aria-label="팝업 닫기">×</button></header>
     <div className="html-dialog-content"><p id="html-dialog-description">아래 코드를 복사해 잡코리아 편집기의 <strong>HTML 모드</strong>에 붙여 넣으세요. 공고 이미지를 클릭하면 브이더블유 홈페이지로 이동합니다.</p>
-      <div className="html-guide"><strong>먼저 공고 이미지를 업로드해주세요.</strong><p>잡코리아 또는 회사 웹서버에 업로드한 이미지의 공개 주소를 입력하세요. 현재 PC의 192.168… 주소는 외부 지원자가 볼 수 없습니다.</p><a href={`/downloads/VW-${design.letter}-3x.png`} target="_blank" rel="noopener noreferrer">{design.letter}안 고해상도 이미지 열기 ↗</a></div>
+      <div className="html-guide"><strong>먼저 공고 이미지를 업로드해주세요.</strong><p>잡코리아 또는 회사 웹서버에 업로드한 이미지의 공개 주소를 입력하세요. 현재 PC의 192.168… 주소는 외부 지원자가 볼 수 없습니다.</p><a href={`${import.meta.env.BASE_URL}downloads/VW-${design.letter}-3x.png`} target="_blank" rel="noopener noreferrer">{design.letter}안 고해상도 이미지 열기 ↗</a></div>
       <label htmlFor="public-image-url">공개 이미지 주소</label><input autoFocus id="public-image-url" type="url" value={imageUrl} placeholder="https://example.com/recruitment.png" onChange={event => { setImageUrl(event.target.value); setStatus(''); }} aria-describedby="image-url-help" aria-invalid={imageUrl !== '' && !valid}/>
       <p className={`html-url-help ${imageUrl && !valid ? 'invalid' : ''}`} id="image-url-help">{imageUrl && !valid ? '외부에서 접근할 수 있는 http(s) 이미지 주소를 입력해주세요. 로컬·내부 IP 주소는 사용할 수 없습니다.' : '로그인 없이 열리는 이미지 파일 주소를 사용해주세요.'}</p>
       <div className="html-code-label"><label htmlFor="recruitment-html">붙여 넣을 HTML</label><span>이미지 클릭 → v-w.co.kr</span></div>
@@ -84,3 +84,4 @@ export default function HtmlCodeDialog({ design, onClose }) {
     <footer className="html-dialog-footer"><button type="button" onClick={onClose}>닫기</button><button type="button" className="html-copy" disabled={!valid || copying} onClick={copyCode}>{copying ? '복사 중…' : 'HTML 코드 복사'}</button></footer>
   </dialog>;
 }
+

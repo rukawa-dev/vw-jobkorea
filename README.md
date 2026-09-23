@@ -15,7 +15,15 @@ npm run dev
 
 PNG 생성에는 설치된 Microsoft Edge를 사용합니다. 다른 Chromium 브라우저를 사용하려면 `PNG_BROWSER_CHANNEL=chrome` 또는 `PNG_BROWSER_PATH` 환경변수로 실행 파일 경로를 지정하세요.
 
-## 페이지
+## GitHub Pages 배포
+
+1. 저장소 Settings → Pages → Source를 **GitHub Actions**로 변경합니다.
+2. 변경한 소스와 `.github/workflows/deploy-pages.yml`을 `main` 브랜치에 커밋·푸시합니다.
+3. Actions 탭에서 **Deploy GitHub Pages**가 완료되면 `https://rukawa-dev.github.io/vw-jobkorea/`로 접속합니다.
+
+워크플로가 Node 24와 Chromium을 준비한 뒤 `npm run build:only`로 공고 이미지를 갱신하고 `dist`를 배포합니다. `npm run build`는 로컬 미리보기 서버까지 실행하므로 CI에서는 사용하지 않습니다. Pages에서 제공하는 하위 경로와 공개 주소가 빌드에 자동 적용되며, HTML 코드 팝업의 이미지 주소도 배포된 주소로 채워집니다. 별도 Custom domain은 필요하지 않으며 HTTPS 설정은 유지합니다.
+
+## 페이지 주소
 
 - `#/` — 시안 비교
 - `#/editorial` — A 에디토리얼

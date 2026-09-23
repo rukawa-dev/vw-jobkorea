@@ -14,12 +14,12 @@ const designs = [
 ];
 function Gallery({ onShowCode }) {
   return <main className="gallery" id="content">
-    <header className="gallery-header"><img src="/imgs/로고.svg" alt="VW"/><span>DIGITAL BRANDING DIRECTORS</span><span>RECRUITMENT 2026</span></header>
+    <header className="gallery-header"><img src={import.meta.env.BASE_URL + 'imgs/로고.svg'} alt="VW"/><span>DIGITAL BRANDING DIRECTORS</span><span>RECRUITMENT 2026</span></header>
     <section className="gallery-intro"><div><p className="overline">ONE OPPORTUNITY. THREE PERSPECTIVES.</p><h1>같은 채용,<br/>세 가지 첫인상<span>.</span></h1></div><div className="intro-aside"><span className="open-label"><i/> WE’RE HIRING</span><p>브랜드의 다음을 함께 고민할<br/><strong>디지털 · UI/UX 디자이너</strong>를 찾습니다.</p><p className="intro-meta">신입 · 경력 &nbsp; / &nbsp; 정규직 &nbsp; / &nbsp; 서울 마포</p></div></section>
     <div className="collection-heading"><span>채용공고 디자인 컬렉션</span><span>SELECT A PERSPECTIVE ↙</span></div>
     <section className="design-grid" aria-label="채용공고 시안">
       {designs.map((design, index) => <article className="design-card" key={design.id}>
-        <a className={`design-preview preview-${design.id}`} href={`#/${design.id}`} aria-label={`${design.name} 채용공고 전체 보기`}><div className="preview-image"><img src={design.id === 'studio' ? '/downloads/VW-C-preview.png' : `/downloads/VW-${design.letter}.png`} alt={`${design.name} 채용공고 시안`} /></div><span className="preview-footer">공고 전체 보기 <span>↗</span></span></a>
+        <a className={`design-preview preview-${design.id}`} href={`#/${design.id}`} aria-label={`${design.name} 채용공고 전체 보기`}><div className="preview-image"><img src={design.id === 'studio' ? import.meta.env.BASE_URL + 'downloads/VW-C-preview.png' : `${import.meta.env.BASE_URL}downloads/VW-${design.letter}.png`} alt={`${design.name} 채용공고 시안`} /></div><span className="preview-footer">공고 전체 보기 <span>↗</span></span></a>
         <div className="card-heading"><p className="overline">0{index + 1} / {design.english}</p><span>{design.letter}</span></div><h2>{design.title}</h2><p className="card-description">{design.description}</p>
         <div className="card-actions"><a href={`#/${design.id}`}>{design.letter}안 둘러보기 ↗</a><button type="button" className="html-code-button" onClick={() => onShowCode(design)} aria-label={`${design.letter}안 채용공고 HTML 코드`}>채용공고 HTML 코드</button></div>
       </article>)}
@@ -37,6 +37,7 @@ function App() {
   return <><a className="skip-link" href="#content" onClick={event => {event.preventDefault(); document.getElementById('content')?.scrollIntoView(); document.getElementById('content')?.focus();}}>본문으로 건너뛰기</a>{design ? <><nav className="design-nav" aria-label="시안 전환"><a className="back-link" href="#/">← <span>전체 시안</span></a><div>{designs.map(item => <a key={item.id} href={`#/${item.id}`} aria-current={route === item.id ? 'page' : undefined}>{item.letter ? `${item.letter}. ` : ''}{item.name}</a>)}</div><div className="nav-tools"><button className="html-code-button" onClick={() => setCodeDesign(design)}>채용공고 HTML 코드</button><button onClick={() => window.print()} aria-label="현재 채용공고 인쇄">인쇄 ↗</button></div></nav><Page/><div className="page-end"><a href="#/">← 전체 시안으로 돌아가기</a><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>맨 위로 ↑</button></div></> : route ? <main className="not-found"><h1>페이지를 찾을 수 없습니다.</h1><a href="#/">전체 시안으로 돌아가기 →</a></main> : <Gallery onShowCode={setCodeDesign}/ >}{codeDesign && <HtmlCodeDialog key={codeDesign.id} design={codeDesign} onClose={() => setCodeDesign(null)}/>}</>;
 }
 createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
 

@@ -3,7 +3,7 @@ import { createServer } from 'vite';
 import { mkdir } from 'node:fs/promises';
 
 // Render at the original 860 CSS-pixel layout, with 3 physical pixels per CSS pixel.
-const server = await createServer({ server: { host: '127.0.0.1', port: 0, open: false } });
+const server = await createServer({ base: '/', server: { host: '127.0.0.1', port: 0, open: false } });
 let browser;
 try {
   await server.listen();

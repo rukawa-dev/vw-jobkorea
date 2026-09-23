@@ -17,7 +17,7 @@ const entries = [
 ];
 function jsx(html) {
   return html.replace(/(<table[^>]*>)(\s*<tr>)/g, '$1<tbody>$2').replace(/<\/tr>(\s*)<\/table>/g, '</tr>$1</tbody></table>').replace(/<!--[^]*?-->/g, '').replace(/\bclass=/g, 'className=').replace(/\bcellpadding=/gi, 'cellPadding=').replace(/\bcellspacing=/gi, 'cellSpacing=').replace(/\bcolspan=/gi, 'colSpan=')
-    .replace(/src="imgs\//g, 'src="/imgs/').replace(/<(img|br|hr)([^>]*?)\s*\/?\s*>/g, '<$1$2 />')
+    .replace(/src="imgs\/([^"]+)"/g, (_, file) => `src={import.meta.env.BASE_URL + ${JSON.stringify(`imgs/${file}`)}}`).replace(/<(img|br|hr)([^>]*?)\s*\/?\s*>/g, '<$1$2 />')
     .replace(/style="([^"]*)"/g, (_, css) => {
       const styles = Object.fromEntries(css.split(';').filter(x => x.includes(':')).map(x => {
         const i = x.indexOf(':'); return [x.slice(0, i).trim().replace(/-([a-z])/g, (_, c) => c.toUpperCase()), x.slice(i + 1).trim()];
