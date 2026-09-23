@@ -1,0 +1,39 @@
+/* Keep the complete office photograph visible, including the company name. */
+.recruitment.editorial .studio,
+.recruitment.poster .studio,
+.recruitment.studio .studio {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0;
+}
+
+.recruitment .studio > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.recruitment .studio .studio-copy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 32px;
+  align-items: center;
+  padding: 32px;
+}
+
+.recruitment .studio-copy > .eyebrow {
+  grid-column: 1 / -1;
+}
+
+.recruitment .studio .studio-copy h2 {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .recruitment .studio .studio-copy {
+    grid-template-columns: 1fr;
+    padding: 28px 24px;
+    gap: 20px;
+  }
+}

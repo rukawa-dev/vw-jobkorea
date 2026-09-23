@@ -1,0 +1,39 @@
+import { chromium } from 'playwright-core';
+import { createServer } from 'vite';
+import { mkdir } from 'node:fs/promises';
+
+// Render at the original 860 CSS-pixel layout, with 3 physical pixels per CSS pixel.
+const server = await createServer({ server: { host: '127.0.0.1', port: 0, open: false } });
+let browser;
+try {
+  await server.listen();
+  const address = server.httpServer.address();
+  browser = await chromium.launch({
+    headless: true,
+    ...(process.env.PNG_BROWSER_PATH
+      ? { executablePath: process.env.PNG_BROWSER_PATH }
+      : { channel: process.env.PNG_BROWSER_CHANNEL || 'msedge' }),
+  });
+  const page = await browser.newPage({ viewport: { width: 1000, height: 1000 }, deviceScaleFactor: 3 });
+  await mkdir('public/downloads', { recursive: true });
+  for (const [letter, route] of [['A', 'editorial'], ['B', 'poster'], ['C', 'studio']]) {
+    await page.goto(`http://127.0.0.1:${address.port}/#/${route}`);
+    await page.locator('main.recruitment').waitFor();
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await Promise.all([...document.querySelectorAll('main img')].map(img => img.decode()));
+    });
+    await page.addStyleTag({ content: '.design-nav,.page-end,.skip-link{display:none!important} *{animation:none!important;transition:none!important}' });
+    const main = page.locator('main.recruitment');
+    const box = await main.boundingBox();
+    const output = `public/downloads/VW-${letter}-3x.png`;
+    await main.screenshot({ path: output, scale: 'device', timeout: 60000 });
+    if (letter === 'C') {
+      await page.screenshot({ path: 'public/downloads/VW-C-preview.png', clip: { x: box.x, y: box.y, width: box.width, height: 1080 }, scale: 'css' });
+    }
+    console.log(`${output}: ${Math.round(box.width * 3)} × ${Math.round(box.height * 3)} px`);
+  }
+} finally {
+  await browser?.close();
+  await server.close();
+}

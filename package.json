@@ -1,0 +1,21 @@
+{
+  "name": "vw-recruitment",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "npm run build:only && npm run preview",
+    "build:only": "npm run export:png && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "export:png": "node scripts/export-png.mjs"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.63.0",
+    "vite": "^7.0.0"
+  }
+}
