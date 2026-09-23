@@ -4,45 +4,33 @@
   </a>
 </p>
 
-<h1 align="center">✨ VW Recruitment</h1>
-
 <p align="center">
-  좋은 동료를 만나는, 세 가지 첫인상.<br>
-  <strong>디자이너 · 기획자/PM 채용공고 디자인 아카이브</strong>
+  <strong>브이더블유 채용공고 디자인 아카이브</strong><br>
+  다양한 직무와 채용 회차의 공고를 모아, 디자인하고 기록합니다.
 </p>
 
-<h2 align="center">🚀 <a href="https://rukawa-dev.github.io/vw-jobkorea/">LIVE DEMO · 운영 사이트 바로가기 ↗</a></h2>
+## 🗂️ 프로젝트 소개
 
-<p align="center">
-  <a href="https://rukawa-dev.github.io/vw-jobkorea/">https://rukawa-dev.github.io/vw-jobkorea/</a>
-</p>
+새로운 채용이 열릴 때마다 공고와 디자인을 추가해 나가는 아카이브입니다. 특정 직무나 시안 개수에 범위를 한정하지 않습니다.
 
-<p align="center">
-  🎨 <a href="https://rukawa-dev.github.io/vw-jobkorea/#/designer"><strong>디자이너 시안</strong></a>
-  &nbsp; · &nbsp;
-  🧭 <a href="https://rukawa-dev.github.io/vw-jobkorea/#/planner"><strong>기획자/PM 시안</strong></a>
-  &nbsp; · &nbsp;
-  💻 <a href="https://github.com/rukawa-dev/vw-jobkorea">GitHub</a>
-</p>
+- 🗓️ **등록일별 기록** — 채용 회차별 공고를 찾고 이전 공고를 보관합니다.
+- 🎨 **공고별 디자인** — 직무와 채용 목적에 맞는 시안을 제작합니다.
+- 📋 **게시용 HTML** — 완성한 공고를 잡코리아 편집기에 붙여 넣습니다.
 
----
+## 🎨 제작 예시
 
-| 🗓️ 날짜별 아카이브 | 🎨 직무별 A·B·C 시안 | 📋 잡코리아 HTML |
-| :---: | :---: | :---: |
-| 등록일 순으로 공고 찾기 | 총 6개 디자인 비교 | 이미지가 연결된 코드 복사 |
-
-## 🎨 디자인 미리보기
+아래는 현재 등록된 디자이너 공고의 시안입니다. 앞으로 추가되는 공고는 각 채용에 맞게 구성합니다.
 
 | 🤍 A · 에디토리얼 | 🖤 B · 타이포 포스터 | 💛 C · 스튜디오 |
 | :---: | :---: | :---: |
 | <img src="public/downloads/VW-A-preview.png" width="240" alt="에디토리얼 시안"> | <img src="public/downloads/VW-B-preview.png" width="240" alt="타이포 포스터 시안"> | <img src="public/downloads/VW-C-preview.png" width="240" alt="스튜디오 시안"> |
 | 여백과 차분한 타이포그래피 | 대담한 글자와 선명한 대비 | 2D 캐릭터와 친근한 분위기 |
 
-두 직무에 각각 A·B·C 시안을 제공합니다.
+현재는 디자이너와 기획자/PM 공고가 등록되어 있습니다. A·B·C는 이번 공고의 시안 구성이며, 모든 공고에 적용되는 고정 형식은 아닙니다.
 
 ## 📋 잡코리아에 사용하는 방법
 
-**등록일별 목록 → 직무 선택 → 시안 선택 → HTML 코드 복사**
+**등록일별 목록 → 채용공고 선택 → 시안 선택 → HTML 코드 복사**
 
 1. 운영 사이트에서 원하는 채용공고를 선택합니다.
 2. **채용공고 HTML 코드** 버튼을 누릅니다.
@@ -99,10 +87,12 @@ main에 push → 공고 이미지 생성 → Vite 빌드 → GitHub Pages 배포
 | 자동 생성되는 공고 이미지 | [public/downloads](public/downloads) |
 | 원문 채용 기준 | [디자이너](docs/designer-source.md) · [기획자/PM](docs/planner-source.md) |
 
-**새 공고 추가 시:** 실제 등록일(`registeredAt`), 고유 ID, 마감일, 직무, 시안 경로를 등록합니다. 날짜는 최신순으로 정렬됩니다. 새 회차의 시안도 별도 경로로 연결해 기존 공고를 보존하세요.
+**새 공고 추가 시:** 실제 등록일(`registeredAt`), 고유 ID, 마감일, 직무, 시안 수와 경로를 등록합니다. 날짜는 최신순으로 정렬됩니다. 같은 직무의 새 회차도 별도 공고로 추가해 이전 기록을 보존하세요.
+
+현재 상세 화면과 이미지 생성 대상은 코드에 직접 연결되어 있습니다. 목록 데이터 추가와 함께 `src/main.jsx`의 시안·경로 및 `scripts/export-png.mjs`의 출력 대상도 연결해야 합니다. 이미지 파일명과 HTML 팝업의 저장 키는 공고별로 구분합니다.
 
 <details>
-<summary><strong>🧩 페이지 경로와 이미지 생성 설정</strong></summary>
+<summary><strong>🧩 현재 등록된 공고의 경로와 이미지 생성 설정</strong></summary>
 
 | 화면 | 디자이너 | 기획자/PM |
 | --- | --- | --- |
