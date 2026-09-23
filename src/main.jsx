@@ -1,3 +1,4 @@
+import { ArchiveHeader, ArchiveFooter } from './ArchiveChrome';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import Editorial from './pages/Editorial';
@@ -21,7 +22,7 @@ const plannerDesigns = designs.map((design, index) => ({ ...design, id: 'planner
 function Gallery({ onShowCode, planner = false }) {
   const collection = planner ? plannerDesigns : designs;
   return <main className="gallery" id="content">
-    <header className="gallery-header"><img src={import.meta.env.BASE_URL + 'imgs/로고.svg'} alt="VW"/><span>DIGITAL BRANDING DIRECTORS</span><span>RECRUITMENT 2026</span></header>
+    <ArchiveHeader/>
     <div className="gallery-back"><a href="#/">← 등록일별 공고 목록</a><span>2026.09.10 등록 · {planner ? '기획자 · PM' : '디자이너'} 채용</span></div><section className="gallery-intro"><div><p className="overline">ONE OPPORTUNITY. THREE PERSPECTIVES.</p><h1>같은 채용,<br/>세 가지 첫인상<span>.</span></h1></div><div className="intro-aside"><span className="open-label"><i/> WE’RE HIRING</span><p>브랜드의 다음을 함께 고민할<br/><strong>{planner ? '디지털 기획자 · PM' : '디지털 · UI/UX 디자이너'}</strong>{planner ? '을' : '를'} 찾습니다.</p><p className="intro-meta">경력 2년 이상 &nbsp; / &nbsp; 정규직 &nbsp; / &nbsp; 서울 마포</p></div></section>
     <div className="collection-heading"><span>채용공고 디자인 컬렉션</span><span>SELECT A PERSPECTIVE ↙</span></div>
     <section className="design-grid" aria-label="채용공고 시안">
@@ -31,7 +32,7 @@ function Gallery({ onShowCode, planner = false }) {
         <div className="card-actions"><a href={`#/${design.id}`}>{design.letter}안 둘러보기 ↗</a><button type="button" className="html-code-button" onClick={() => onShowCode(design)} aria-label={`${design.letter}안 채용공고 HTML 코드`}>채용공고 HTML 코드</button></div>
       </article>)}
     </section>
-    <footer className="gallery-footer"><span>© 2026 VW. ㈜브이더블유</span><p>세 시안은 동일한 채용 조건을 담고 있습니다.<br/>채용공고 HTML 코드를 복사해 편집기에 붙여 넣으세요.</p><a href="https://www.v-w.co.kr/" target="_blank" rel="noopener noreferrer">우리의 작업 보기 ↗</a></footer>
+    <ArchiveFooter/>
   </main>;
 }
 function App() {
