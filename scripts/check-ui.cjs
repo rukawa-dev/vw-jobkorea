@@ -33,9 +33,13 @@ const fs = require('node:fs');
   await page.reload();
   await page.getByRole('heading', { level: 1 }).waitFor();
   await page.getByRole('link', { name: '← 전체 시안', exact: true }).click();
-  const download = page.waitForEvent('download');
-  await page.getByRole('link', { name: 'A안 고해상도 PNG 다운로드' }).click();
-  if (!(await download).suggestedFilename().endsWith('.png')) errors.push('Download failed');
+  await page.getByRole('button', { name: 'A안 채용공고 HTML 코드' }).click();
+  await page.getByRole('dialog').waitFor();
+  await page.getByLabel('공개 이미지 주소', { exact: true }).fill('https://example.com/VW-A.png');
+  const html = await page.getByLabel('붙여 넣을 HTML').inputValue();
+  if (!html.includes('href="https://www.v-w.co.kr/"') || !html.includes('src="https://example.com/VW-A.png"')) errors.push('HTML export incorrect');
+  await page.keyboard.press('Escape');
+  if (await page.getByRole('dialog').count()) errors.push('Dialog did not close');
   await browser.close();
   if (errors.length) { console.error(errors); process.exitCode = 1; }
 })();
