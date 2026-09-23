@@ -16,7 +16,7 @@ try {
   });
   const page = await browser.newPage({ viewport: { width: 1000, height: 1000 }, deviceScaleFactor: 3 });
   await mkdir('public/downloads', { recursive: true });
-  for (const [letter, route] of [['A', 'editorial'], ['B', 'poster'], ['C', 'studio']]) {
+  for (const [letter, route] of [['A', 'editorial'], ['B', 'poster'], ['C', 'studio'], ['PM-A', 'planner/editorial'], ['PM-B', 'planner/poster'], ['PM-C', 'planner/studio']]) {
     await page.goto(`http://127.0.0.1:${address.port}/#/${route}`);
     await page.locator('main.recruitment').waitFor();
     await page.evaluate(async () => {
@@ -28,8 +28,8 @@ try {
     const box = await main.boundingBox();
     const output = `public/downloads/VW-${letter}-3x.png`;
     await main.screenshot({ path: output, scale: 'device', timeout: 60000 });
-    if (letter === 'C') {
-      await page.screenshot({ path: 'public/downloads/VW-C-preview.png', clip: { x: box.x, y: box.y, width: box.width, height: 1080 }, scale: 'css' });
+    if (letter === 'C' || letter.startsWith('PM-')) {
+      await page.screenshot({ path: `public/downloads/VW-${letter}-preview.png`, clip: { x: box.x, y: box.y, width: box.width, height: 1080 }, scale: 'css' });
     }
     console.log(`${output}: ${Math.round(box.width * 3)} × ${Math.round(box.height * 3)} px`);
   }

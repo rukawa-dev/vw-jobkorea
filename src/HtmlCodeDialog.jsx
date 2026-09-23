@@ -28,9 +28,10 @@ function initialUrl(letter) {
 }
 
 export default function HtmlCodeDialog({ design, onClose }) {
+  const imageKey = design.imageKey || design.letter;
   const dialog = useRef(null);
   const textarea = useRef(null);
-  const [imageUrl, setImageUrl] = useState(() => initialUrl(design.letter));
+  const [imageUrl, setImageUrl] = useState(() => initialUrl(imageKey));
   const [status, setStatus] = useState('');
   const [copying, setCopying] = useState(false);
   const [checking, setChecking] = useState({ url: '', state: 'loading' });
@@ -39,7 +40,7 @@ export default function HtmlCodeDialog({ design, onClose }) {
   const valid = publicImageUrl(imageUrl.trim());
   const imageState = checking.url === imageUrl.trim() ? checking.state : 'loading';
   const ready = valid && imageState === 'ready';
-  const code = `<div style="width:100%;max-width:860px;margin:0 auto;text-align:center;">\n  <a href="${website}" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">\n    <img src="${escapeAttribute(imageUrl.trim() || '공개_이미지_URL을_입력해주세요')}" alt="브이더블유 디지털 · UI/UX 디자이너 채용 — ${design.name}" width="860" border="0" style="display:block;width:100%;max-width:860px;height:auto;margin:0 auto;border:0;" />\n  </a>\n</div>`;
+  const code = `<div style="width:100%;max-width:860px;margin:0 auto;text-align:center;">\n  <a href="${website}" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">\n    <img src="${escapeAttribute(imageUrl.trim() || '공개_이미지_URL을_입력해주세요')}" alt="브이더블유 ${design.jobTitle || '디지털 · UI/UX 디자이너'} 채용 — ${design.name}" width="860" border="0" style="display:block;width:100%;max-width:860px;height:auto;margin:0 auto;border:0;" />\n  </a>\n</div>`;
 
   useEffect(() => {
     const previousFocus = document.activeElement;
@@ -91,14 +92,14 @@ export default function HtmlCodeDialog({ design, onClose }) {
       try { copied = document.execCommand('copy'); } catch { copied = false; }
     }
     if (copied) {
-      try { localStorage.setItem(`vw-image-url-${design.letter}`, imageUrl.trim()); } catch { /* Optional persistence. */ }
+      try { localStorage.setItem(`vw-image-url-${imageKey}`, imageUrl.trim()); } catch { /* Optional persistence. */ }
     }
     setStatus(copied ? '복사했습니다. 잡코리아 편집기의 HTML 모드에 붙여 넣으세요.' : '자동 복사가 지원되지 않습니다. 선택된 코드를 Ctrl+C 또는 길게 눌러 복사해주세요.');
     setCopying(false);
   }
 
   return <dialog ref={dialog} className="html-dialog" aria-labelledby="html-dialog-title" aria-describedby="html-dialog-description" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === dialog.current) { const bounds = dialog.current.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) onClose(); } }}>
-    <header className="html-dialog-header"><div><p>{design.letter} / {design.name}</p><h2 id="html-dialog-title">채용공고 HTML 코드</h2></div><button type="button" className="html-close" onClick={onClose} aria-label="팝업 닫기">×</button></header>
+    <header className="html-dialog-header"><div><p>{design.jobTitle ? '기획자 · PM / ' : ''}{design.letter} / {design.name}</p><h2 id="html-dialog-title">채용공고 HTML 코드</h2></div><button type="button" className="html-close" onClick={onClose} aria-label="팝업 닫기">×</button></header>
     <div className="html-dialog-content"><p id="html-dialog-description">코드를 복사해 잡코리아 편집기의 <strong>HTML 모드</strong>에 붙여 넣으세요.</p>
       <div className={`html-image-status ${!valid || imageState === 'error' ? 'is-error' : ''}`}>
         <div role="status" aria-live="polite"><span className="html-state-dot" aria-hidden="true"/><span>{!valid ? '공개 이미지 주소를 입력해주세요.' : imageState === 'loading' ? '공고 이미지를 확인하고 있습니다…' : imageState === 'ready' ? '공고 이미지가 준비되었습니다.' : '이미지를 불러오지 못했습니다. 주소 또는 배포 상태를 확인해주세요.'}</span></div>

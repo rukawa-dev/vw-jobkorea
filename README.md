@@ -46,3 +46,5 @@ PNG 생성에는 설치된 Microsoft Edge를 사용합니다. 다른 Chromium �
 내부 IP나 localhost 이미지 URL은 외부 지원자가 접근할 수 없어 복사 전에 공개 URL을 입력하도록 안내합니다. 공개 사이트에서 실행하면 현재 사이트의 이미지 URL을 기본값으로 사용하며, `VITE_PUBLIC_SITE_URL` 환경변수로 이미지가 배포되는 공개 도메인을 지정할 수도 있습니다. 입력한 이미지 URL은 시안별로 복사 성공 시 브라우저에 저장됩니다. 이미지 업로드 자체는 자동화하지 않습니다.
 
 팝업은 Esc와 닫기 버튼을 지원하고, 내부 IP의 HTTP 환경에서 Clipboard API를 사용할 수 없으면 선택 기반 복사를 시도합니다. 둘 다 지원되지 않으면 코드 수동 복사를 안내합니다.
+
+기획자 · PM 채용은 #/planner 에서 별도로 확인합니다. A/B/C 상세 경로는 #/planner/editorial, #/planner/poster, #/planner/studio 입니다. 원문 채용 기준은 docs/planner-source.md 에 정리했습니다. HTML 이미지 및 저장 키는 PM-A / PM-B / PM-C로 분리되어 있습니다.
