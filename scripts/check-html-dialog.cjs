@@ -8,7 +8,7 @@ const assert = require('node:assert/strict');
   const image = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><rect width="10" height="10" fill="red"/></svg>';
   await page.route('https://rukawa-dev.github.io/**',route=>route.fulfill({contentType:'image/svg+xml',body:image}));
   await page.route('https://example.com/**',route=>route.fulfill({contentType:'image/svg+xml',body:image}));
-  await page.goto('http://127.0.0.1:5173/');
+  await page.goto('http://127.0.0.1:5173/#/designer');
   for(const letter of ['A','B','C']) {
    const trigger=page.getByRole('button',{name:`${letter}안 채용공고 HTML 코드`});
    await trigger.click();

@@ -28,7 +28,13 @@ function jsx(html) {
 const shared = new Map();
 let sharedCode = '';
 for (const [name, id, file] of entries) {
-  const html = fs.readFileSync(path.join(source, file), 'utf8');
+  // Original mockups predate the confirmed JobKorea requirement (49968438).
+  const html = fs.readFileSync(path.join(source, file), 'utf8')
+    .replaceAll('<strong>경력무관</strong> · 신입 및 경력 지원 가능', '<strong>경력 2년 이상</strong>')
+    .replaceAll('경력무관 · 신입 및 경력 지원 가능', '경력 2년 이상')
+    .replaceAll('신입 · 경력 / 경력무관', '경력 2년 이상')
+    .replaceAll('신입 · 경력', '경력 2년 이상')
+    .replaceAll('경력무관', '경력 2년 이상');
   const css = html.match(/<style>([^]*?)<\/style>/)[1].replace(/@font-face\{[^}]*\}/g, '').replace(/url\('fonts\//g, "url('/fonts/").replace(/\bbody\s*\{/g, '&{').replace(/\bmain\s*\{/g, '&{');
   fs.writeFileSync(`src/pages/${name}.css`, `.recruitment.${id} {\n${css}\n}\n`);
   let body = html.match(/<body>([^]*?)<\/body>/)[1].replace(/<!--[^]*?-->/g, '').trim();

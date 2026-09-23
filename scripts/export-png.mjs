@@ -28,7 +28,7 @@ try {
     const box = await main.boundingBox();
     const output = `public/downloads/VW-${letter}-3x.png`;
     await main.screenshot({ path: output, scale: 'device', timeout: 60000 });
-    if (letter === 'C' || letter.startsWith('PM-')) {
+    {
       await page.screenshot({ path: `public/downloads/VW-${letter}-preview.png`, clip: { x: box.x, y: box.y, width: box.width, height: 1080 }, scale: 'css' });
     }
     console.log(`${output}: ${Math.round(box.width * 3)} × ${Math.round(box.height * 3)} px`);

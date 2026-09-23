@@ -5,7 +5,7 @@ export function Section1() { return (<section className="pad work"><div classNam
 <div className="work-item"><span className="num">03</span><div><h3>대화하고, 함께 완성합니다.</h3><p>프로젝트 진행과 고객사 커뮤니케이션에 참여합니다.</p></div></div>
 </section>); }
 
-export function Section2() { return (<section className="pad fit"><p className="eyebrow">GOOD DESIGN STARTS WITH GOOD PEOPLE.</p><h2>이런 당신이라면,<br />우리의 다음 동료.</h2><div className="fit-columns"><div><h3>함께하기 위한 경험</h3><ul><li><strong>경력무관</strong> · 신입 및 경력 지원 가능</li><li>전문대 졸업 이상의 학력</li><li>디지털 UX 디자인 경험</li><li>원활한 커뮤니케이션과 협업 능력</li></ul></div><div><h3>더 반가운 경험 · 우대사항</h3><ul><li>AI 도구를 디자인 업무에 활용하실 수 있는 분</li><li>디지털 에이전시 경력이 있는 분</li></ul></div></div></section>); }
+export function Section2() { return (<section className="pad fit"><p className="eyebrow">GOOD DESIGN STARTS WITH GOOD PEOPLE.</p><h2>이런 당신이라면,<br />우리의 다음 동료.</h2><div className="fit-columns"><div><h3>함께하기 위한 경험</h3><ul><li><strong>경력 2년 이상</strong></li><li>전문대 졸업 이상의 학력</li><li>디지털 UX 디자인 경험</li><li>원활한 커뮤니케이션과 협업 능력</li></ul></div><div><h3>더 반가운 경험 · 우대사항</h3><ul><li>AI 도구를 디자인 업무에 활용하실 수 있는 분</li><li>디지털 에이전시 경력이 있는 분</li></ul></div></div></section>); }
 
 export function Section3() { return (<section className="studio"><img src={import.meta.env.BASE_URL + 'imgs/vw-office.jpg'} alt="브이더블유 사무실 입구" /><div className="studio-copy"><p className="eyebrow">LIFE AT VW</p><h2>몰입할 시간.<br />재충전할 여유.</h2><p>자유로운 휴가문화<br />연차 · 반차 · 경조휴가 · 노동절 휴무<br />음료와 간식 제공 · 퇴직연금</p></div></section>); }
 

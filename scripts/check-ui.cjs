@@ -9,7 +9,7 @@ const fs = require('node:fs');
   fs.mkdirSync('artifacts', { recursive: true });
   for (const width of [1440, 390, 320]) {
     await page.setViewportSize({ width, height: 1000 });
-    for (const route of ['', 'editorial', 'poster', 'studio']) {
+    for (const route of ['', 'designer', 'editorial', 'poster', 'studio', 'planner']) {
       await page.goto(`http://127.0.0.1:5173/#/${route}`);
       await page.evaluate(() => document.fonts.ready);
       await page.locator('main').waitFor();
@@ -23,7 +23,7 @@ const fs = require('node:fs');
       console.log(width, route || 'gallery', JSON.stringify(result));
     }
   }
-  await page.goto('http://127.0.0.1:5173/');
+  await page.goto('http://127.0.0.1:5173/#/designer');
   await page.getByRole('link', { name: 'A안 둘러보기 ↗' }).click();
   await page.waitForURL('**/#/editorial');
   await page.getByRole('link', { name: 'B. 타이포 포스터', exact: true }).click();

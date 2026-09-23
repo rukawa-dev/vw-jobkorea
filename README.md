@@ -25,12 +25,13 @@ PNG 생성에는 설치된 Microsoft Edge를 사용합니다. 다른 Chromium �
 
 ## 페이지 주소
 
-- `#/` — 시안 비교
+- `#/` — 등록일별 채용공고 목록
+- `#/designer` — 디자이너 시안 비교
 - `#/editorial` — A 에디토리얼
 - `#/poster` — B 타이포 포스터
 - `#/studio` — C 스튜디오
 
-해시 경로를 사용하므로 정적 호스팅에서도 개별 페이지 접근과 새로고침이 가능합니다. 공통 채용 섹션은 `src/pages/Sections.jsx`, 각 디자인은 `src/pages`에서 관리합니다. 이미지와 Wanted Sans 폰트는 `public`에 포함했습니다. HTML 삽입용 PNG는 실제 React 공고를 가로 860 CSS px, 배율 3배(출력 가로 2,580px)로 렌더링한 이미지입니다. `npm run build` 및 `npm run build:only` 실행 시 자동 갱신되며, `npm run export:png`로 이미지만 다시 생성할 수도 있습니다. A·B 비교 미리보기에는 기존 이미지를 사용하고, 새롭게 디자인한 C안의 미리보기는 빌드 시 함께 생성합니다. C안의 캐릭터 이미지와 생성 프롬프트는 `public/imgs/studio-characters.png`, `public/imgs/studio-characters.prompt.md`에 있습니다.
+해시 경로를 사용하므로 정적 호스팅에서도 개별 페이지 접근과 새로고침이 가능합니다. 공통 채용 섹션은 `src/pages/Sections.jsx`, 각 디자인은 `src/pages`에서 관리합니다. 이미지와 Wanted Sans 폰트는 `public`에 포함했습니다. HTML 삽입용 PNG는 실제 React 공고를 가로 860 CSS px, 배율 3배(출력 가로 2,580px)로 렌더링한 이미지입니다. `npm run build` 및 `npm run build:only` 실행 시 자동 갱신되며, `npm run export:png`로 이미지만 다시 생성할 수도 있습니다. 디자이너·기획자 A·B·C의 비교 미리보기와 HTML 삽입용 이미지는 모두 빌드 시 최신 내용으로 생성합니다. C안의 캐릭터 이미지와 생성 프롬프트는 `public/imgs/studio-characters.png`, `public/imgs/studio-characters.prompt.md`에 있습니다.
 
 공고 내용과 지원 기간은 참고 자료 기준입니다. 지원 접수는 구현하지 않았으며 지원 방법을 안내합니다. 상단 메뉴에서 시안 이동 및 인쇄가 가능합니다.
 
@@ -48,3 +49,6 @@ PNG 생성에는 설치된 Microsoft Edge를 사용합니다. 다른 Chromium �
 팝업은 Esc와 닫기 버튼을 지원하고, 내부 IP의 HTTP 환경에서 Clipboard API를 사용할 수 없으면 선택 기반 복사를 시도합니다. 둘 다 지원되지 않으면 코드 수동 복사를 안내합니다.
 
 기획자 · PM 채용은 #/planner 에서 별도로 확인합니다. A/B/C 상세 경로는 #/planner/editorial, #/planner/poster, #/planner/studio 입니다. 원문 채용 기준은 docs/planner-source.md 에 정리했습니다. HTML 이미지 및 저장 키는 PM-A / PM-B / PM-C로 분리되어 있습니다.
+
+
+등록일별 첫 화면의 데이터는 `src/recruitments.js`에서 관리합니다. `registeredAt`은 실제 채용공고 등록일이며 파일 수정일과 무관합니다. 날짜 그룹은 최신순으로 자동 정렬됩니다. 새 채용공고를 추가할 때 고유 id와 등록일, 마감일, 직무 및 해당 공고의 시안 경로를 함께 등록하세요.
