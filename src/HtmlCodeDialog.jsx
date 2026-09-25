@@ -33,7 +33,7 @@ export default function HtmlCodeDialog({ design, onClose }) {
   const textarea = useRef(null);
   const [imageUrl, setImageUrl] = useState(() => initialUrl(imageKey));
   const [mobileUrl, setMobileUrl] = useState(() => initialUrl(imageKey + '-MO'));
-  const [responsive, setResponsive] = useState(true);
+  const [responsive, setResponsive] = useState(false);
   const [mobileCheck, setMobileCheck] = useState({url:'', state:'loading'});
   const [status, setStatus] = useState('');
   const [copying, setCopying] = useState(false);
@@ -84,6 +84,7 @@ export default function HtmlCodeDialog({ design, onClose }) {
   }, [imageUrl, retry]);
 
   useEffect(() => {
+    if (!responsive) return;
     const url = mobileUrl.trim();
     if (!publicImageUrl(url)) return;
     let active = true;
@@ -102,7 +103,7 @@ export default function HtmlCodeDialog({ design, onClose }) {
       image.src = url;
     }, 300);
     return () => { active = false; clearTimeout(start); clearTimeout(timeout); image.onload = null; image.onerror = null; };
-  }, [mobileUrl, retry]);
+  }, [mobileUrl, retry, responsive]);
 
   async function copyCode() {
     if (!ready || copying) return;
@@ -129,13 +130,13 @@ export default function HtmlCodeDialog({ design, onClose }) {
   return <dialog ref={dialog} className="html-dialog" aria-labelledby="html-dialog-title" aria-describedby="html-dialog-description" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === dialog.current) { const bounds = dialog.current.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) onClose(); } }}>
     <header className="html-dialog-header"><div><p>{design.jobTitle ? '기획자 · PM / ' : ''}{design.letter} / {design.name}</p><h2 id="html-dialog-title">채용공고 HTML 코드</h2></div><button type="button" className="html-close" onClick={onClose} aria-label="팝업 닫기">×</button></header>
     <div className="html-dialog-content"><p id="html-dialog-description">코드를 복사해 잡코리아 편집기의 <strong>HTML 모드</strong>에 붙여 넣으세요.</p>
-<label className="html-mode">표시 방식<select value={responsive ? "responsive" : "pc"} onChange={event => {setResponsive(event.target.value === "responsive"); setStatus("");}}><option value="responsive">PC + MO 자동 전환</option><option value="pc">PC 이미지 공통 사용</option></select></label>
+<label className="html-mode">표시 방식<select value={responsive ? "responsive" : "pc"} onChange={event => {setResponsive(event.target.value === "responsive"); setStatus("");}}><option value="pc">PC 이미지 공통 사용 (잡코리아 권장)</option><option value="responsive">PC + MO 자동 전환 (잡코리아 비권장)</option></select></label>
       <div className={`html-image-status ${!valid || imageState === 'error' ? 'is-error' : ''}`}>
         <div role="status" aria-live="polite"><span className="html-state-dot" aria-hidden="true"/><span>{!valid ? '공개 이미지 주소를 입력해주세요.' : imageState === 'loading' ? '공고 이미지를 확인하고 있습니다…' : imageState === 'ready' ? 'PC 공고 이미지가 준비되었습니다.' : '이미지를 불러오지 못했습니다. 주소 또는 배포 상태를 확인해주세요.'}</span></div>
         {valid && <a href={imageUrl.trim()} target="_blank" rel="noopener noreferrer">PC 이미지 보기 ↗</a>}
         {valid && imageState === 'error' && <button className="html-retry" onClick={() => { setChecking({ url: imageUrl.trim(), state: 'loading' }); setStatus(''); setRetry(value => value + 1); }}>다시 확인</button>}
       </div>
-<p className="html-url-help">767px 이하에서는 MO 이미지가 표시됩니다. 잡코리아 적용 여부는 저장 후 확인해주세요.</p>
+<p className="html-url-help">{responsive ? '767px 이하에서는 MO 이미지로 전환됩니다. 잡코리아 실제 공고에서는 이 방식의 이미지가 표시되지 않을 수 있습니다. PC 이미지 공통 사용을 권장합니다.' : 'PC와 모바일에서 같은 이미지를 화면 너비에 맞춰 표시합니다. 저장 후 실제 공고 페이지에서도 표시 여부를 확인해주세요.'}</p>
       {responsive && <div className={'html-image-status ' + (!mobileValid || mobileState === 'error' ? 'is-error' : '')}><div role="status">{!mobileValid ? 'MO 공개 이미지 주소를 입력해주세요.' : mobileState === 'ready' ? 'MO 이미지가 준비되었습니다.' : mobileState === 'error' ? 'MO 이미지를 불러오지 못했습니다.' : 'MO 이미지를 확인하고 있습니다…'}</div>{mobileValid && <a href={mobileUrl.trim()} target="_blank" rel="noopener noreferrer">MO 이미지 보기 ↗</a>}{mobileState === 'error' && <button className="html-retry" onClick={() => setRetry(value => value + 1)}>MO 다시 확인</button>}</div>}
       <details className="html-url-settings" open={editing} onToggle={event => setEditing(event.currentTarget.open)}><summary>이미지 주소 변경</summary><div>
         <label htmlFor="public-image-url">PC 공개 이미지 주소</label><input id="public-image-url" type="url" value={imageUrl} placeholder="https://example.com/recruitment.png" onChange={event => { setImageUrl(event.target.value); setStatus(''); }} aria-describedby="image-url-help" aria-invalid={imageUrl !== '' && !valid}/>
