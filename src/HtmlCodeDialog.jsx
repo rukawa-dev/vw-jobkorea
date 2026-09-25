@@ -45,7 +45,7 @@ export default function HtmlCodeDialog({ design, onClose }) {
   const mobileValid = publicImageUrl(mobileUrl.trim());
   const mobileState = mobileCheck.url === mobileUrl.trim() ? mobileCheck.state : 'loading';
   const ready = valid && imageState === 'ready' && (!responsive || (mobileValid && mobileState === 'ready'));
-  const pcCode = `<div style="width:100%;max-width:860px;margin:0 auto;text-align:center;">\n  <a href="${website}" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">\n    <img src="${escapeAttribute(imageUrl.trim() || '공개_이미지_URL을_입력해주세요')}" alt="브이더블유 ${design.jobTitle || '디지털 · UI/UX 디자이너'} 채용 — ${design.name}" width="860" border="0" style="display:block;width:100%;max-width:860px;height:auto;margin:0 auto;border:0;" />\n  </a>\n</div>`;
+  const pcCode = `<div style="width:100%;margin:0 auto;text-align:center;">\n  <a href="${website}" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">\n    <img src="${escapeAttribute(imageUrl.trim() || '공개_이미지_URL을_입력해주세요')}" alt="브이더블유 ${design.jobTitle || '디지털 · UI/UX 디자이너'} 채용 — ${design.name}" border="0" style="display:block;width:100%;height:auto;margin:0 auto;border:0;" />\n  </a>\n</div>`;
 
   const code = responsive ? pcCode.replace('    <img', '    <picture>\n      <source media="(max-width: 767px)" srcset="' + escapeAttribute(mobileUrl.trim()) + '" />\n      <img').replace('\n  </a>', '\n    </picture>\n  </a>') : pcCode;
 
