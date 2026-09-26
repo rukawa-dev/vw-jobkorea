@@ -49,7 +49,7 @@ export const recruitments = defineRecruitments([
         title: '첫눈에 남는 강한 인상', description: '대담한 타이포그래피와 선명한 대비. 다음 화면과 다음 경험을 만들어갈 당신에게.',
         component: '2026-09-26-designer/Poster' },
       { id: 'brand-frame', letter: 'C', name: '브랜드 프레임', english: 'BRAND FRAME', style: 'brand-frame',
-        title: '브랜드의 다음을, 당신의 시선으로', description: '회사 공간 사진을 중심으로 자연광과 우드, 그린의 따뜻한 분위기를 담았습니다. 함께 일할 다음을 그리는 디자이너 채용 캠페인.',
+        title: '브랜드의 다음을, 당신의 시선으로', description: '회사 사진과 대담한 타이포그래피, 차콜과 아이보리의 편집 디자인. 브랜드의 감각과 채용 정보를 함께 담았습니다.',
         component: '2026-09-26-designer/BrandFrame' },
     ],
   },
@@ -93,4 +93,5 @@ export function resolveRoute(route, entries = recruitments) {
   return {};
 }
 export const exportDesigns = recruitments.flatMap(recruitment => recruitment.designs);
+
 

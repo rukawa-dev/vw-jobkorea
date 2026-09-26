@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://rukawa-dev.github.io/vw-jobkorea/" target="_blank" rel="noopener noreferrer">
-    <img src="docs/assets/readme-demo.svg" width="1120" alt="🚀 LIVE DEMO — VW 채용공고 운영 사이트 바로가기">
+    <img src="docs/assets/채용공고_사이트_바로가기_배너.svg" width="1120" alt="🚀 LIVE DEMO — VW 채용공고 운영 사이트 바로가기">
   </a>
 </p>
 
