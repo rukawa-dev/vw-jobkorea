@@ -3,7 +3,7 @@
 .brand-frame *{box-sizing:border-box}.brand-frame :is(h1,h2,h3,p,figure,dl,dd,ol,ul){margin:0}.brand-frame img{display:block;width:100%}.brand-frame h2{font-size:6.8cqw;line-height:1.35;letter-spacing:-.3cqw;font-weight:700}.brand-frame h3{font-size:4.8cqw;line-height:1.5;font-weight:700}
 .brand-frame .bf-masthead{padding:4cqw 6cqw;display:flex;align-items:center;justify-content:space-between}.brand-frame .bf-masthead img{width:13cqw}.brand-frame .bf-masthead span{font-size:2cqw;line-height:1.5;text-align:right;letter-spacing:.05cqw}
 .brand-frame .bf-editorial-hero{position:relative;height:80cqw;background:#39352c;isolation:isolate;color:#fff}.brand-frame .bf-hero-photo{height:100%;object-fit:cover;object-position:center 60%}.brand-frame .bf-hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#171915d9,transparent 95%),linear-gradient(0deg,#17191577,transparent 60%)}.brand-frame .bf-hero-type{position:absolute;inset:5cqw 6cqw}.brand-frame .bf-hero-type p{font-size:2.4cqw;letter-spacing:.2cqw}.brand-frame .bf-hero-type>span{display:block;font-size:16cqw;letter-spacing:-.7cqw;line-height:.94;margin-top:6cqw;font-weight:500}.brand-frame .bf-hero-type i{font-family:Georgia,serif;font-weight:400}.brand-frame .bf-hero-type h1{font-size:6.3cqw;line-height:1.35;letter-spacing:-.25cqw;margin-top:6cqw}.brand-frame .bf-hero-mark{position:absolute;right:6cqw;bottom:5cqw;font-size:11cqw;line-height:1;color:#e7d4b1}
-.brand-frame .bf-facts{display:flex;align-items:center;gap:0;margin:0 6cqw;padding:3.5cqw 0;border-bottom:1px solid #c8c0b0}.brand-frame .bf-facts span{display:flex;align-items:center;font-size:3.4cqw;line-height:1.5;letter-spacing:-.08cqw;font-weight:500;white-space:nowrap}.brand-frame .bf-facts span+span::before{content:"";width:1px;height:2.6cqw;background:#bdb6a8;margin:0 3.2cqw}
+.brand-frame .bf-facts{display:flex;align-items:center;gap:0;margin-top:2.4cqw;color:#fff}.brand-frame .bf-facts span{display:flex;align-items:center;font-size:2.8cqw;line-height:1.5;letter-spacing:-.04cqw;font-weight:400;white-space:nowrap}.brand-frame .bf-facts span+span::before{content:"";width:1px;height:2cqw;background:#ffffff66;margin:0 2.4cqw}
 .brand-frame .bf-block{padding:7cqw 6cqw}.brand-frame .bf-section-top{display:flex;justify-content:space-between;gap:3cqw;font-size:2.6cqw;letter-spacing:.08cqw;margin-bottom:5cqw}.brand-frame .bf-block>h2{margin-bottom:5cqw}.brand-frame .bf-duty-list{border-bottom:1px solid #c8c0b0}.artwork-frame .recruitment.brand-frame .work-item{display:grid;grid-template-columns:8cqw 1fr;gap:3cqw;padding:4cqw 0;border-top:1px solid #c8c0b0;background:none;margin:0;border-left:0}.brand-frame .bf-number{font-family:Georgia,serif;font-style:italic;font-size:5.5cqw;color:#847557}.brand-frame .work-item h3{margin-bottom:2cqw}.brand-frame .work-item p{font-size:4.445cqw;line-height:1.65}
 .brand-frame .bf-perspective{padding:6cqw;background:#292824;color:#f3f0e8}.brand-frame .bf-photo-composition{position:relative;height:78cqw;margin:5cqw 0 7cqw}.brand-frame .bf-card-photo{position:absolute;left:0;top:0;width:53cqw;height:62cqw}.brand-frame .bf-card-photo img{height:100%;object-fit:cover}.brand-frame .bf-flower-photo{position:absolute;right:0;bottom:0;width:32cqw;height:42cqw;border:1.2cqw solid #292824}.brand-frame .bf-flower-photo img{height:100%;object-fit:cover}.brand-frame .bf-composition-word{position:absolute;right:0;top:2cqw;font-size:9cqw;line-height:1;letter-spacing:-.3cqw;text-shadow:0 1px 8px #0004}.brand-frame .bf-composition-word i{font-family:Georgia,serif;color:#d5be94}.brand-frame .bf-perspective>p{margin-top:4cqw;font-size:4.445cqw}.brand-frame .bf-philosophy{display:flex;justify-content:space-between;border-top:1px solid #6a6459;margin-top:6cqw;padding-top:3cqw;color:#d5be94;font-size:2.8cqw;letter-spacing:.15cqw}
 .brand-frame .bf-qualification{border-top:1px solid #c8c0b0;padding:4cqw 0}.brand-frame .bf-qualification h3{margin-bottom:3cqw}.brand-frame .bf-qualification small{font-size:3.2cqw;color:#756951;margin-left:2cqw;font-weight:400}.brand-frame .bf-qualification ul{padding-left:5cqw}.brand-frame .bf-qualification li{margin:1.8cqw 0;font-size:4.445cqw}
@@ -23,11 +23,11 @@
 /* Lounge recruitment cover: integrated typography, directional shade. */
 .brand-frame .bf-values-hero{height:78cqw;isolation:isolate;overflow:hidden}
 .brand-frame .bf-values-hero>img{height:100%;object-fit:cover;object-position:center 56%}
-.brand-frame .bf-values-hero::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(105deg,rgba(24,23,20,.68),rgba(24,23,20,.12) 78%),linear-gradient(0deg,rgba(24,23,20,.45),transparent 45%)}
+.brand-frame .bf-values-hero::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(105deg,rgba(24,23,20,.68),rgba(24,23,20,.12) 78%),linear-gradient(0deg,rgba(24,23,20,.62),transparent 48%)}
 .brand-frame .bf-values-title{top:6cqw;z-index:1}
 .brand-frame .bf-values-title p{font-size:2.6cqw;letter-spacing:.2cqw;margin:0 0 3cqw}
 .brand-frame .bf-values-title h1{font-size:9.6cqw;line-height:1.06;letter-spacing:-.35cqw;font-weight:600;margin:0;color:#fff}
-.brand-frame .bf-hero-philosophy{position:absolute;left:6cqw;bottom:5cqw;z-index:1;margin:0;font-size:3.5cqw;line-height:1.5;letter-spacing:-.1cqw;color:#fff}
+.brand-frame .bf-hero-bottom{position:absolute;left:6cqw;right:6cqw;bottom:5cqw;z-index:1}.brand-frame .bf-hero-philosophy{margin:0;font-size:3.5cqw;line-height:1.5;letter-spacing:-.1cqw;color:#fff}
 
 .brand-frame .bf-support dd>strong{display:block;font-size:4.8cqw;line-height:1.45;color:#292824;margin-bottom:2.5cqw}
 .brand-frame .bf-support dd>p{margin:0 0 2cqw}
@@ -42,9 +42,16 @@
 .brand-frame .bf-terms>.bf-section-top{margin-bottom:3cqw}
 
 .brand-frame .bf-benefits{display:grid;gap:2.8cqw;margin-top:3cqw}
-.brand-frame .bf-benefits article{display:grid;grid-template-columns:1fr;gap:.6cqw}
+.brand-frame .bf-benefits article{display:grid;grid-template-columns:minmax(0,1fr) 27cqw;column-gap:3cqw;row-gap:.6cqw;align-items:start;padding:1.5cqw 0}
+.brand-frame .bf-benefit-copy{grid-column:1;grid-row:1;align-self:center}
+.brand-frame .bf-benefit-copy h3{margin-bottom:1cqw}
+.brand-frame .bf-benefit-illustration{grid-column:2;grid-row:1;align-self:center;position:relative;display:block;width:27cqw;height:27cqw;overflow:hidden;mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 7%,#000 93%,transparent);mask-composite:intersect}
+.brand-frame .bf-benefit-illustration img{position:absolute;width:200%;max-width:none;height:200%;left:0;top:0}
+.brand-frame .bf-benefit-break img{left:-100%}
+.brand-frame .bf-benefit-care img{top:-100%}
+.brand-frame .bf-benefit-tools img{left:-100%;top:-100%}
 .brand-frame .bf-benefits h3{font-size:4.445cqw;line-height:1.5;color:#292824;margin:0;font-weight:600}
-.brand-frame .bf-benefits p{font-size:4.445cqw;line-height:1.55;margin:0}
+.brand-frame .bf-benefits p{font-size:3.7cqw;line-height:1.65;margin:0}
 
 .brand-frame .bf-inside{background:#e7e1d4;padding-top:5cqw;padding-bottom:5cqw}
 .brand-frame .bf-inside>h2{font-size:5.6cqw;line-height:1.35;margin-bottom:3.5cqw}
@@ -64,3 +71,37 @@
 
 /* Keep the original signage intact; apply warmth only at rendering/export. */
 .brand-frame .bf-inside-wide img{filter:brightness(1.09) sepia(.22) saturate(1.06)}
+/* Marker follows each wrapped line and preserves inline text spacing. */
+.brand-frame .text-highlight{color:#292824;background:linear-gradient(transparent 32%,#eee08c 32%,#eee08c 94%,transparent 94%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0;font-weight:600}
+.brand-frame .bf-application .text-highlight{background:#eee08c;color:#292824}
+
+/* The background change closes the role section without a second divider. */
+.brand-frame .bf-duty-list{border-bottom:0}
+
+/* Tighten the reading rhythm while preserving body type and the cover. */
+.brand-frame .bf-block{padding-top:5cqw;padding-bottom:5cqw}
+.brand-frame .bf-section-top{margin-bottom:3.5cqw}
+.brand-frame .bf-block>h2{margin-bottom:3.5cqw}
+.artwork-frame .recruitment.brand-frame .work-item{padding:3cqw 0}
+.brand-frame .work-item h3{margin-bottom:1.2cqw}
+.brand-frame .bf-photo-composition{height:66cqw;margin:3cqw 0 5cqw}
+.brand-frame .bf-card-photo{height:55cqw}
+.brand-frame .bf-flower-photo{height:36cqw}
+.brand-frame .bf-qualification{padding:3cqw 0}
+.brand-frame .bf-qualification h3{margin-bottom:2cqw}
+.brand-frame .bf-qualification li{margin:1.3cqw 0}
+.brand-frame .bf-life-spread>img{height:54cqw}
+.brand-frame .bf-benefits{gap:1.4cqw}
+.brand-frame .bf-benefits article{grid-template-columns:minmax(0,1fr) 25cqw;padding:.7cqw 0}
+.brand-frame .bf-benefit-illustration{width:25cqw;height:25cqw}
+.brand-frame .bf-inside-grid img{height:44cqw}
+.brand-frame .bf-inside-wide img{height:42cqw}
+.brand-frame .bf-application{padding-top:5cqw}
+.brand-frame .bf-apply-intro{margin:3cqw 0 4cqw}
+.brand-frame .bf-process{padding:3cqw 0}
+.brand-frame .bf-apply-row{margin-top:4cqw}
+.brand-frame .bf-salary-note{font-size:3.7cqw;color:#c9c5bc}
+.brand-frame .bf-salary-note strong{font-weight:600}
+.brand-frame .bf-apply-action{border-top:1px solid #777064;padding-top:3cqw}
+.brand-frame .bf-apply-action p{font-weight:700;color:#eee08c}
+.brand-frame .bf-note{margin-top:4cqw}
