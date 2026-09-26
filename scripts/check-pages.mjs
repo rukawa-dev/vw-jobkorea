@@ -24,7 +24,7 @@ try {
   }
   await page.getByRole('button', { name: '채용공고 HTML 코드', exact: true }).click();
   const expected = 'https://rukawa-dev.github.io/vw-jobkorea/downloads/VW-C-3x.png';
-  assert.equal(await page.getByLabel('PC 공개 이미지 주소', { exact: true }).inputValue(), expected);
+  assert.equal(await page.getByLabel('공통 공개 이미지 주소', { exact: true }).inputValue(), expected);
   assert((await page.getByLabel('붙여 넣을 HTML').inputValue()).includes(expected));
   assert.equal((await page.request.get('http://127.0.0.1:4188/vw-jobkorea/downloads/VW-C-3x.png')).status(), 200);
   assert.deepEqual(failures, []);

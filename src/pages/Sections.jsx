@@ -18,8 +18,8 @@ export function Section4() { return (<section className="pad"><div className="se
 
 export function Section5() { return (<section className="pad apply"><p className="eyebrow">YOUR WORK. YOUR THINKING. YOUR NEXT.</p><h2>Let’s design<br />what’s next. ↗</h2><p className="apply-lead">당신의 작업과 생각을 보여주세요.</p>
 <div className="steps"><div><small>01</small>서류전형</div><span aria-hidden="true">→</span><div><small>02</small>면접</div><span aria-hidden="true">→</span><div><small>03</small>최종합격</div></div>
-<div className="apply-info"><div><h3>보내주실 자료</h3><p>이력서 · 경력기술서 · 포트폴리오<br />경력기술서에 희망연봉을 기재해주세요.</p></div><div><h3>지원 방법 및 기간</h3><p>잡코리아 이력서 양식으로 즉시지원<br />2026.09.10 — 2026.10.10</p></div></div>
-<p className="apply-note">면접 일정은 추후 개별 안내됩니다.<br />채용 일정은 회사 사정에 따라 변경되거나 조기 마감될 수 있습니다.<br />지원서에 허위 사실이 발견될 경우 채용이 취소될 수 있습니다.</p>
+<div className="apply-info"><div><h3>보내주실 자료</h3><p>이력서 · 경력기술서 · 포트폴리오<br />경력기술서에 희망연봉을 기재해주세요.</p></div><div><h3>지원 방법</h3><p>잡코리아 이력서 양식으로 즉시지원</p></div></div>
+<p className="apply-note">면접 일정은 추후 개별 안내됩니다.<br />채용 일정은 회사 사정에 따라<br />변경되거나 조기 마감될 수 있습니다.<br />지원서에 허위 사실이 발견될 경우<br />채용이 취소될 수 있습니다.</p>
 <footer className="footer"><div><img src={import.meta.env.BASE_URL + 'imgs/로고.svg'} alt="VW" /><p>㈜브이더블유 · DIGITAL BRANDING DIRECTORS</p></div><a href="https://www.v-w.co.kr/" target="_blank" rel="noopener noreferrer">우리의 작업 보기 ↗</a></footer>
 </section>); }
 

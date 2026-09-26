@@ -30,6 +30,8 @@ let sharedCode = '';
 for (const [name, id, file] of entries) {
   // Original mockups predate the confirmed JobKorea requirement (49968438).
   const html = fs.readFileSync(path.join(source, file), 'utf8')
+    .replaceAll('지원 방법 및 기간', '지원 방법')
+    .replace(/<br\s*\/?\s*>\s*\d{4}\.\d{2}\.\d{2}\s*[—–~-]\s*\d{4}\.\d{2}\.\d{2}(?:\s*·\s*채용 시 마감)?/g, '')
     .replaceAll('<strong>경력무관</strong> · 신입 및 경력 지원 가능', '<strong>경력 2년 이상</strong>')
     .replaceAll('경력무관 · 신입 및 경력 지원 가능', '경력 2년 이상')
     .replaceAll('신입 · 경력 / 경력무관', '경력 2년 이상')

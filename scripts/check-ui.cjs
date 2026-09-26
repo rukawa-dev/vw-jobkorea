@@ -1,4 +1,4 @@
-const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
+const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright-core');
 const fs = require('node:fs');
 (async () => {
   const browser = await chromium.launch({ headless: true, channel: 'msedge' });
@@ -36,7 +36,7 @@ const fs = require('node:fs');
   await page.getByRole('button', { name: 'A안 채용공고 HTML 코드' }).click();
   await page.getByRole('dialog').waitFor();
   await page.locator('summary').click();
-  await page.getByLabel('공개 이미지 주소', { exact: true }).fill('https://example.com/VW-A.png');
+  await page.getByLabel('공통 공개 이미지 주소', { exact: true }).fill('https://example.com/VW-A.png');
   const html = await page.getByLabel('붙여 넣을 HTML').inputValue();
   if (!html.includes('href="https://www.v-w.co.kr/"') || !html.includes('src="https://example.com/VW-A.png"')) errors.push('HTML export incorrect');
   await page.keyboard.press('Escape');

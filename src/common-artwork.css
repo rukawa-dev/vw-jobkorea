@@ -1,0 +1,107 @@
+/* One proportional artwork: 720px desktop / 360px mobile. 4.445cqw = 16px at 360px. */
+.artwork-frame{width:100%;max-width:720px;margin:auto;container-type:inline-size}
+.artwork-frame .recruitment{width:100%;max-width:none;font-size:4.445cqw;line-height:1.75}
+.artwork-frame .recruitment :is(h1,h2,h3,p,li,dt,dd,small){word-break:keep-all;overflow-wrap:normal}
+/* The PNG keeps these line breaks at every display size. Balance short copy
+   so a trailing word is not stranded on a line by itself. */
+.artwork-frame .recruitment :is(.work-item p,.p-work-grid article>p:last-child,.fit-columns li,.p-fit-grid li){text-wrap:balance}
+.artwork-frame .recruitment :is(.pad,.p-section){padding:7cqw 6.667cqw}
+.artwork-frame .recruitment :is(.intro,.fit-columns,.details,.apply-info,.studio .studio-copy,.p-work-grid,.p-fit-grid,.p-perks,.p-apply-info){display:grid;grid-template-columns:minmax(0,1fr);gap:5cqw}
+.artwork-frame .recruitment :is(.muted,.work-item p,.fit-columns ul,.studio-copy p:last-child,.apply-info p,.hero-bottom p,.p-lead,.p-about>p:not(.p-label),.p-work-grid article>p:last-child,.p-fit-grid ul,.p-perks p,.p-apply-intro,.p-apply-info p,.p-conditions dd span){font-size:4.445cqw;line-height:1.8;max-width:none}
+.artwork-frame .recruitment :is(.eyebrow,.badge,.detail dt,.fit-columns h3,.apply-info h3,.p-label,.p-card-sub,.p-fit-grid h3,.p-conditions dt,.p-apply-info h3){font-size:3.6cqw;letter-spacing:0;line-height:1.6}
+.artwork-frame .recruitment :is(.detail small,.apply-note,.p-fineprint,.p-apply-info small){font-size:3.89cqw;line-height:1.8;opacity:1}
+.artwork-frame .recruitment :is(.intro h2,.fit h2,.studio-copy h2,.p-section h2){font-size:6.1cqw;line-height:1.4;letter-spacing:-.28cqw;margin:4cqw 0}
+.artwork-frame .recruitment :is(.work-item h3,.detail dd,.p-work-grid h3,.p-perks h3,.p-conditions dd strong){font-size:5.56cqw;line-height:1.5;letter-spacing:-.15cqw}
+.artwork-frame .recruitment .section-heading{display:block;margin-bottom:5cqw}
+.artwork-frame .recruitment .section-heading h2{font-size:6.67cqw;letter-spacing:-.3cqw}
+.artwork-frame .recruitment .section-heading .eyebrow{text-align:left;max-width:none;margin-top:3cqw}
+.artwork-frame .recruitment .masthead{padding:4.2cqw 6.667cqw}
+.artwork-frame .recruitment .masthead img{width:11.5cqw}
+.artwork-frame .recruitment .masthead p{font-size:2.5cqw}
+.artwork-frame .recruitment .hero{padding:6.3cqw 6.667cqw}
+.artwork-frame .recruitment .hero-top{flex-wrap:wrap;gap:3cqw}
+.artwork-frame .recruitment .hero-top .eyebrow{font-size:2.8cqw;letter-spacing:.15cqw}
+.artwork-frame .recruitment .badge{font-size:2.8cqw;padding:.8cqw 2cqw}
+.artwork-frame .recruitment .hero h1{font-size:9.2cqw;letter-spacing:-.4cqw;margin:5.6cqw 0;line-height:1.25}
+.artwork-frame .recruitment .hero-bottom{gap:3cqw;align-items:center}
+.artwork-frame .recruitment .arrow{font-size:9.6cqw}
+.artwork-frame .poster .hero h1{font-size:15.6cqw;line-height:.95;letter-spacing:-1cqw}
+.artwork-frame .poster .hero h1 b{font-size:16cqw}
+.artwork-frame .poster .hero-bottom{display:block}
+.artwork-frame .poster .hero-bottom .eyebrow{text-align:left;font-size:3.6cqw;margin-top:5cqw}
+.artwork-frame .recruitment .cover{height:auto}
+.artwork-frame .editorial .cover{margin:0 6.667cqw}
+.artwork-frame .recruitment .cover img{height:60cqw}
+.artwork-frame .recruitment .cover-label{left:3cqw;bottom:3cqw;font-size:2.5cqw;letter-spacing:.2cqw;padding:2cqw}
+.artwork-frame .recruitment .ticker{font-size:3.33cqw;line-height:1.8;letter-spacing:0;padding:4cqw}
+.artwork-frame .editorial .ticker{margin:0 6.667cqw;padding:4cqw 0}
+.artwork-frame .recruitment .work-item{grid-template-columns:minmax(0,1fr);padding:4.2cqw 0;gap:2cqw}
+.artwork-frame .recruitment .work-item .num{font-size:4cqw;padding:0}
+.artwork-frame .recruitment .fit-columns ul{padding-left:5cqw;margin:4cqw 0 0}
+.artwork-frame .recruitment .fit-columns li{margin-bottom:3cqw}
+.artwork-frame .recruitment .studio{margin:0;min-height:0}
+.artwork-frame .recruitment .studio .studio-copy{padding:5.6cqw 6.667cqw}
+.artwork-frame .recruitment .details{margin-top:6cqw}
+.artwork-frame .recruitment .detail{padding-top:4cqw}
+.artwork-frame .recruitment .apply{margin:0;padding:7cqw 6.667cqw}
+.artwork-frame .recruitment .apply h2{font-size:8.8cqw;letter-spacing:-.5cqw;margin:6cqw 0}
+.artwork-frame .recruitment .apply-lead{font-size:5cqw;margin-bottom:5cqw}
+.artwork-frame .recruitment .steps{font-size:4.445cqw;gap:2cqw;padding:5cqw 0}
+.artwork-frame .recruitment .steps small{font-size:3.33cqw}
+.artwork-frame .recruitment .apply-info{margin-top:5cqw}
+.artwork-frame .recruitment .footer{flex-wrap:wrap;font-size:3cqw;gap:5cqw;margin-top:5cqw;padding-top:6cqw}
+.artwork-frame .recruitment .footer img{width:11.5cqw}
+.artwork-frame .playful svg{width:6cqw;height:6cqw}
+.artwork-frame .playful .p-header{margin:0 6.667cqw;padding:4.2cqw 0;gap:3cqw}
+.artwork-frame .playful .p-header img{width:11.5cqw}
+.artwork-frame .playful .p-header>span:nth-child(2){display:none}
+.artwork-frame .playful .p-header>span{font-size:2.8cqw}
+.artwork-frame .playful .p-hero{padding:6.3cqw 6.667cqw 0}
+.artwork-frame .playful .p-kicker{font-size:2.8cqw;letter-spacing:.3cqw}
+.artwork-frame .playful .p-hero h1{font-size:7.5cqw;letter-spacing:-.3cqw;margin:4.2cqw 0}
+.artwork-frame .playful .p-hero h1>svg{width:6cqw;height:6cqw;right:-2cqw;top:-4cqw}
+.artwork-frame .playful .p-chips{gap:2cqw;margin-top:5cqw}
+.artwork-frame .playful .p-chips span{font-size:3.33cqw;padding:1cqw 2.5cqw}
+.artwork-frame .playful .p-illustration{margin:6cqw -4cqw 0}
+.artwork-frame .playful .p-note{font-size:2.5cqw;right:2cqw;top:2cqw;padding:2cqw 3cqw}
+.artwork-frame .playful .p-note svg{width:3cqw;height:3cqw;right:1cqw;bottom:1cqw}
+.artwork-frame .playful .p-hero-link{display:none}
+.artwork-frame .playful .p-ribbon{gap:2cqw;font-size:2.2cqw;letter-spacing:.1cqw;padding:4cqw}
+.artwork-frame .playful .p-ribbon svg{width:3cqw;height:3cqw}
+.artwork-frame .playful .p-label{margin-bottom:5cqw!important;font-size:3cqw;gap:3cqw}
+.artwork-frame .playful .p-label>span{width:6cqw;height:6cqw;font-size:3cqw}
+.artwork-frame .playful .p-about>p:not(.p-label){margin-top:5cqw}
+.artwork-frame .playful .p-about-doodle{display:none}
+.artwork-frame .playful .p-work-grid{margin-top:6cqw}
+.artwork-frame .playful .p-work-grid article{padding:6cqw;border-radius:3cqw}
+.artwork-frame .playful .p-work-top{margin-bottom:4cqw}
+.artwork-frame .playful .p-work-top svg{width:9cqw;height:9cqw}
+.artwork-frame .playful .p-work-top span{font-size:3cqw}
+.artwork-frame .playful .p-fit-grid{margin-top:6cqw}
+.artwork-frame .playful .p-fit-grid ul{padding-left:5cqw;margin-top:4cqw}
+.artwork-frame .playful .p-fit-grid li{padding:1cqw 0}
+.artwork-frame .playful .p-plus{padding:6cqw;transform:none}
+.artwork-frame .playful .p-plus-tag{font-size:3cqw;margin-bottom:3cqw}
+.artwork-frame .playful .p-perks{margin:5cqw 0}
+.artwork-frame .playful .p-perks>div{display:block}
+.artwork-frame .playful .p-perks svg{width:9cqw;height:9cqw;margin-bottom:3cqw}
+.artwork-frame .playful .p-office{margin-top:5cqw}
+.artwork-frame .playful .p-office figcaption{font-size:2.5cqw;padding:3cqw;gap:2cqw;flex-wrap:wrap}
+.artwork-frame .playful .p-office figcaption>span:last-child{display:none}
+.artwork-frame .playful .p-conditions dl{margin-top:6cqw}
+.artwork-frame .playful .p-conditions dl>div{grid-template-columns:1fr;gap:3cqw;padding:5cqw 0}
+.artwork-frame .playful .p-apply h2{font-size:8cqw}
+.artwork-frame .playful .p-apply-star{right:6cqw;top:24cqw}
+.artwork-frame .playful .p-apply-star svg{width:10cqw;height:10cqw}
+.artwork-frame .playful .p-steps{gap:2cqw;margin:5cqw 0}
+.artwork-frame .playful .p-steps li{padding:5cqw 1cqw}
+.artwork-frame .playful .p-steps strong{font-size:4.445cqw}
+.artwork-frame .playful .p-steps small{font-size:2.8cqw;letter-spacing:0;opacity:1}
+.artwork-frame .playful .p-apply-info{padding:4.2cqw 0}
+.artwork-frame .playful .p-apply-info strong{font-size:4.445cqw}
+.artwork-frame .playful .p-footer{flex-wrap:wrap;gap:5cqw;margin-top:5cqw;padding-top:6cqw}
+.artwork-frame .playful .p-footer img{width:11cqw}
+.artwork-frame .playful .p-footer span,.artwork-frame .playful .p-footer a{font-size:3cqw}
+
+/* Avoid reserving desktop scrollbar space on narrow screens. */
+@media(max-width:720px){html{scrollbar-gutter:auto}}
