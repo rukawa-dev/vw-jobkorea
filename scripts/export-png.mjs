@@ -1,9 +1,11 @@
+import { exportDesigns } from '../src/recruitments.js';
+import { dirname } from 'node:path';
 import { chromium } from 'playwright-core';
 import { createServer } from 'vite';
 import { mkdir, writeFile } from 'node:fs/promises';
 
 // Export one 720px artwork at 2x for desktop and mobile.
-const server = await createServer({ base: '/', server: { host: '127.0.0.1', port: 0, open: false } });
+const server = await createServer({ base: '/', server: { host: '127.0.0.1', port: 5190, open: false } });
 let browser;
 try {
   await server.listen();
@@ -16,7 +18,7 @@ try {
   });
   const page = await browser.newPage({ viewport: { width: 1000, height: 1000 }, deviceScaleFactor: 2 });
   await mkdir('public/downloads', { recursive: true });
-  for (const [letter, route] of [['A', 'editorial'], ['B', 'poster'], ['C', 'studio'], ['PM-A', 'planner/editorial'], ['PM-B', 'planner/poster'], ['PM-C', 'planner/studio']]) {
+  for (const { route, imagePath, previewPath } of exportDesigns) {
     const exportWidth = 720;
     await page.setViewportSize({ width: exportWidth, height: 1000 });
     await page.goto(`http://127.0.0.1:${address.port}/#/${route}`);
@@ -37,7 +39,7 @@ try {
     const main = page.locator('main.recruitment');
     const box = await main.boundingBox();
     // Keep the published URL stable; the historical 3x suffix is retained at 2x output.
-    const output = `public/downloads/VW-${letter}-3x.png`;
+    const output = `public/${imagePath}`;
     if (box.x !== 0 || box.y !== 0 || box.width !== exportWidth) {
       throw new Error(`Unexpected export bounds for ${output}: ${JSON.stringify(box)}`);
     }
@@ -64,12 +66,14 @@ try {
     }, { tiles, width: exportWidth * 2, height: height * 2 });
     await compositor.close();
     const png = Buffer.from(data, 'base64');
+    await mkdir(dirname(output), { recursive: true });
     await writeFile(output, png);
     if (png.readUInt32BE(16) !== exportWidth * 2) {
       throw new Error(`Unexpected PNG width for ${output}`);
     }
     {
-      await page.screenshot({ path: `public/downloads/VW-${letter}-preview.png`, clip: { x: box.x, y: box.y, width: box.width, height: Math.min(box.height, 1080) }, scale: 'css' });
+      await mkdir(dirname(`public/${previewPath}`), { recursive: true });
+      await page.screenshot({ path: `public/${previewPath}`, clip: { x: box.x, y: box.y, width: box.width, height: Math.min(box.height, 1080) }, scale: 'css' });
     }
     console.log(`${output}: ${Math.round(box.width * 2)} × ${Math.round(box.height * 2)} px`);
   }

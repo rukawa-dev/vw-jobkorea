@@ -1,5 +1,6 @@
 const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright-core');
 const fs = require('node:fs');
+const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:5173';
 (async () => {
   const browser = await chromium.launch({ headless: true, channel: 'msedge' });
   const page = await browser.newPage();
@@ -9,10 +10,11 @@ const fs = require('node:fs');
   fs.mkdirSync('artifacts', { recursive: true });
   for (const width of [1440, 390, 320]) {
     await page.setViewportSize({ width, height: 1000 });
-    for (const route of ['', 'designer', 'editorial', 'poster', 'studio', 'planner']) {
-      await page.goto(`http://127.0.0.1:5173/#/${route}`);
+    for (const route of ['', 'designer', 'editorial', 'poster', 'planner']) {
+      await page.goto(`${base}/#/${route}`);
       await page.evaluate(() => document.fonts.ready);
       await page.locator('main').waitFor();
+      await page.evaluate(async () => { await Promise.all([...document.images].map(image => image.decode())); });
       const result = await page.evaluate(() => ({
         overflow: document.documentElement.scrollWidth > innerWidth,
         brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.src),
@@ -23,13 +25,13 @@ const fs = require('node:fs');
       console.log(width, route || 'gallery', JSON.stringify(result));
     }
   }
-  await page.goto('http://127.0.0.1:5173/#/designer');
+  await page.goto(`${base}/#/designer`);
   await page.getByRole('link', { name: 'A안 둘러보기 ↗' }).click();
-  await page.waitForURL('**/#/editorial');
+  await page.waitForURL('**/#/recruitments/2026-09-10-designer/editorial');
   await page.getByRole('link', { name: 'B. 타이포 포스터', exact: true }).click();
-  await page.waitForURL('**/#/poster');
+  await page.waitForURL('**/#/recruitments/2026-09-10-designer/poster');
   await page.goBack();
-  await page.waitForURL('**/#/editorial');
+  await page.waitForURL('**/#/recruitments/2026-09-10-designer/editorial');
   await page.reload();
   await page.getByRole('heading', { level: 1 }).waitFor();
   await page.getByRole('link', { name: '← 전체 시안', exact: true }).click();

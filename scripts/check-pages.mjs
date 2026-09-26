@@ -1,3 +1,4 @@
+import { recruitments, exportDesigns } from '../src/recruitments.js';
 import assert from 'node:assert/strict';
 import { preview } from 'vite';
 import { chromium } from 'playwright-core';
@@ -11,7 +12,7 @@ try {
   const failures = [];
   page.on('pageerror', error => failures.push(error.message));
   page.on('response', response => { if (response.status() >= 400) failures.push(`${response.status()} ${response.url()}`); });
-  for (const route of ['', 'editorial', 'poster', 'studio']) {
+  for (const route of ['', ...recruitments.map(item => item.route), ...exportDesigns.map(item => item.route)]) {
     await page.goto(`http://127.0.0.1:4188/vw-jobkorea/#/${route}`);
     await page.locator('main').waitFor();
     await page.evaluate(async () => {
@@ -23,10 +24,10 @@ try {
     await page.getByRole('heading', { level: 1 }).waitFor();
   }
   await page.getByRole('button', { name: '채용공고 HTML 코드', exact: true }).click();
-  const expected = 'https://rukawa-dev.github.io/vw-jobkorea/downloads/VW-C-3x.png';
+  const expected = 'https://rukawa-dev.github.io/vw-jobkorea/downloads/2026-09-10-planner/poster-3x.png';
   assert.equal(await page.getByLabel('공통 공개 이미지 주소', { exact: true }).inputValue(), expected);
   assert((await page.getByLabel('붙여 넣을 HTML').inputValue()).includes(expected));
-  assert.equal((await page.request.get('http://127.0.0.1:4188/vw-jobkorea/downloads/VW-C-3x.png')).status(), 200);
+  assert.equal((await page.request.get('http://127.0.0.1:4188/vw-jobkorea/downloads/2026-09-10-planner/poster-3x.png')).status(), 200);
   assert.deepEqual(failures, []);
   console.log('GitHub Pages subpath: all pages, reload, images, fonts and public HTML image URL PASS');
 } finally {

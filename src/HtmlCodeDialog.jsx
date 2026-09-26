@@ -15,23 +15,23 @@ function publicImageUrl(value) {
 function escapeAttribute(value) {
   return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
-function initialUrl(letter) {
+function initialUrl(design) {
   try {
-    const saved = localStorage.getItem(`vw-common-image-url-${letter}`);
+    const saved = localStorage.getItem(`vw-common-image-url-${design.storageKey}:${design.imagePath}`);
     if (saved) return saved;
   } catch { /* Storage can be unavailable in private browsing. */ }
   const base = import.meta.env.VITE_PUBLIC_SITE_URL || 'https://rukawa-dev.github.io/vw-jobkorea/';
   try {
-    const url = new URL(`downloads/VW-${letter}-3x.png`, base.replace(/\/?$/, '/')).href;
+    const url = new URL(design.imagePath, base.replace(/\/?$/, '/')).href;
     return publicImageUrl(url) ? url : '';
   } catch { return ''; }
 }
 
 export default function HtmlCodeDialog({ design, onClose }) {
-  const imageKey = design.imageKey || design.letter;
+  const imageKey = `${design.storageKey}:${design.imagePath}`;
   const dialog = useRef(null);
   const textarea = useRef(null);
-  const [imageUrl, setImageUrl] = useState(() => initialUrl(imageKey));
+  const [imageUrl, setImageUrl] = useState(() => initialUrl(design));
   const [status, setStatus] = useState('');
   const [copying, setCopying] = useState(false);
   const [checking, setChecking] = useState({ url: '', state: 'loading' });
