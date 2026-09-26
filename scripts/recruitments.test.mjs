@@ -34,12 +34,12 @@ test('September 26 designer is a separate round with its own artwork and storage
   const latest = recruitments.find(item => item.id === '2026-09-26-designer');
   const previous = recruitments.find(item => item.id === '2026-09-10-designer');
   assert.equal(latest.registeredAt, '2026-09-26');
-  assert.equal(latest.designs.length, 2);
+  assert.equal(latest.designs.length, 3);
   assert.equal(resolveRoute('designer').recruitment, previous);
   latest.designs.forEach((design, index) => {
     assert.equal(design.imagePath, 'downloads/2026-09-26-designer/' + design.id + '-3x.png');
-    assert.notEqual(design.component, previous.designs[index].component);
-    assert.notEqual(design.storageKey, previous.designs[index].storageKey);
+    assert.notEqual(design.component, previous.designs[index]?.component);
+    assert.notEqual(design.storageKey, previous.designs[index]?.storageKey);
     assert.equal(design.aliases.length, 0);
   });
 });

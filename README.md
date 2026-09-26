@@ -34,6 +34,7 @@
 
 - [A · 에디토리얼 컨셉](docs/design-concepts/A-editorial.md)
 - [B · 타이포 포스터 컨셉](docs/design-concepts/B-poster.md)
+- [C · 브랜드 프레임 컨셉 — 9월 26일 신규](docs/design-concepts/C-brand-frame.md)
 - [공통 제작 규칙·새 공고 제작 절차·다음 작업 요청문](docs/design-concepts/README.md)
 
 각 문서에는 색상, 글자 크기, 섹션 순서, 변경 가능한 내용, 검수 기준과 고정 참고 미리보기가 들어 있습니다. 현재 본문은 JSX로 작성하며, 내용 데이터만 전달하는 공용 A·B 템플릿은 다음 개선안으로 문서화했습니다.

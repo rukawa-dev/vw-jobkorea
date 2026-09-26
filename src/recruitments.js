@@ -37,7 +37,7 @@ export function defineRecruitments(entries) {
 export const recruitments = defineRecruitments([
   {
     // Hypothetical new round requested on September 26; content matches September 10.
-    id: '2026-09-26-designer', registeredAt: '2026-09-26', title: '디지털 디자이너',
+    id: '2026-09-26-designer', registeredAt: '2026-09-26', title: '디지털 디자이너 테스트',
     category: 'DESIGN', experience: '경력 2년 이상', employment: '정규직', location: '서울 마포',
     deadline: '2026-10-16', closeWhenFilled: false,
     referenceSource: 'https://www.jobkorea.co.kr/Recruit/GI_Read/49968438',
@@ -48,6 +48,9 @@ export const recruitments = defineRecruitments([
       { id: 'poster', letter: 'B', name: '타이포 포스터', english: 'TYPO POSTER', style: 'poster',
         title: '첫눈에 남는 강한 인상', description: '대담한 타이포그래피와 선명한 대비. 다음 화면과 다음 경험을 만들어갈 당신에게.',
         component: '2026-09-26-designer/Poster' },
+      { id: 'brand-frame', letter: 'C', name: '브랜드 프레임', english: 'BRAND FRAME', style: 'brand-frame',
+        title: '브랜드의 다음을, 당신의 시선으로', description: '공간과 빛을 담은 이미지, 코발트 컬러와 대담한 구성. 새로운 관점을 만드는 디자이너를 위한 캠페인.',
+        component: '2026-09-26-designer/BrandFrame' },
     ],
   },
 
